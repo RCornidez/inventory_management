@@ -30,7 +30,7 @@ class FileStorageServiceTest {
     }
 
     @Test
-    void saveFile_success() throws IOException {
+    void saveFile_givenNonEmptyFile_thenSaved() throws IOException {
         // Arrange
         var mockFile = new MockMultipartFile("file", "test.txt", "text/plain", "Hello World".getBytes());
 
@@ -44,7 +44,7 @@ class FileStorageServiceTest {
     }
 
     @Test
-    void saveFile_failure() {
+    void saveFile_givenEmptyFile_thenThrowsIOException() {
         // Arrange
         var emptyFile = new MockMultipartFile("file", "empty.txt", "text/plain", new byte[0]);
 
@@ -55,7 +55,7 @@ class FileStorageServiceTest {
     }
 
     @Test
-    void loadFile_success() throws IOException {
+    void loadFile_givenExistingFilename_thenResourceReturned() throws IOException {
         // Arrange
         var mockFile = new MockMultipartFile("file", "test.txt", "text/plain", "Hello World".getBytes());
         fileStorageService.saveFile(mockFile);
@@ -72,7 +72,7 @@ class FileStorageServiceTest {
     }
 
     @Test
-    void loadFile_failure() {
+    void loadFile_givenMissingFilename_thenThrowsIOException() {
         // Act & Assert
         assertThrows(IOException.class, () -> {
             fileStorageService.loadFile("nonexistent.txt");
@@ -80,7 +80,7 @@ class FileStorageServiceTest {
     }
 
     @Test
-    void deleteFile_success() throws IOException {
+    void deleteFile_givenExistingFilename_thenDeleted() throws IOException {
         // Arrange
         var mockFile = new MockMultipartFile("file", "test.txt", "text/plain", "Hello World".getBytes());
         fileStorageService.saveFile(mockFile);
@@ -95,7 +95,7 @@ class FileStorageServiceTest {
     }
 
     @Test
-    void deleteFile_failure() throws IOException {
+    void deleteFile_givenMissingFilename_thenThrowsIOException() throws IOException {
         // Act & Assert
         assertThrows(IOException.class, () -> {
             fileStorageService.deleteFile("nonexistent.txt");

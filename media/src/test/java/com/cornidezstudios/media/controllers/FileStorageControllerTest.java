@@ -32,7 +32,7 @@ class FileStorageControllerTest {
     }
 
     @Test
-    void uploadFile_success() throws Exception {
+    void uploadFiles_givenMultipleFiles_thenSaved() throws Exception {
         // Act
         mockMvc.perform(multipart("/api/files").file(mockFileOne).file(mockFileTwo))
                 .andExpect(status().isOk());
@@ -44,7 +44,7 @@ class FileStorageControllerTest {
     }
 
     @Test
-    void getFile_success() throws Exception {
+    void getFile_givenFilename_thenLoaded() throws Exception {
         // Act
         mockMvc.perform(get("/api/files/{filename}", "a.txt"));
 
@@ -53,7 +53,7 @@ class FileStorageControllerTest {
     }
 
     @Test
-    void replaceFile_success() throws Exception {
+    void replaceFile_givenFile_thenSaved() throws Exception {
         // Act
         mockMvc.perform(multipart("/api/files/{filename}", "a.txt")
                         .file(mockFileOne)
@@ -65,7 +65,7 @@ class FileStorageControllerTest {
     }
 
     @Test
-    void deleteFile_success() throws Exception {
+    void deleteFile_givenFilename_thenDeleted() throws Exception {
         // Act
         mockMvc.perform(delete("/api/files/{filename}", "a.txt"))
                 .andExpect(status().isOk());
