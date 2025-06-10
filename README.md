@@ -2,9 +2,10 @@
 
 - [x] Initialize Inventory & Media Services
 
-- [ ] Create Media Microservice
-  - [ ] File Service
-  - [ ] File Controller
+- [x] Create Media Microservice
+  - [x] File Service
+  - [x] File Controller
+  - [x] Unit Tests
 
 - [ ] Create Inventory Microservice 
   - [ ] Product Model
