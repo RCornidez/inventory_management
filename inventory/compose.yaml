@@ -4,6 +4,10 @@ services:
     environment:
       - 'ACCEPT_EULA=yes'
       - 'MSSQL_PID=express'
-      - 'MSSQL_SA_PASSWORD=verYs3cret'
+      - 'MSSQL_SA_PASSWORD=SuperSecretPassword1!'
     ports:
-      - '1433'
+      - '1433:1433'
+#    volumes:
+#      - mssql_data:/var/opt/mssql
+#volumes:
+#  mssql_data:
